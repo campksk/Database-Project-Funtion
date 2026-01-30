@@ -3,29 +3,49 @@ RETURNS TABLE (
     booking_id INT,
     hotel_name TEXT,
     hotel_tel TEXT,
-    room_number INT,
+    room_number TEXT, -- เปลี่ยนจาก INT เป็น TEXT
     check_in DATE,
     check_out DATE,
     total_cost NUMERIC
-) 
-LANGUAGE plpgsql
+)
+ LANGUAGE plpgsql
+
 AS $$
+
 BEGIN
+
     RETURN QUERY
+
     SELECT 
-        b.BookingID,
-        h.HotelName::TEXT,
-        h.Tel::TEXT,
-        r.RoomNumber,
-        b.Start,
-        b.End,
-        b.TotalCost
-    FROM "Booking" b
-    JOIN "Has" has ON b.BookingID = has.BookingID
-    JOIN "Room" r ON has.RoomNumber = r.RoomNumber AND has.BuildingId = r.BuildingId
-    JOIN "Building" bl ON r.BuildingId = bl.BuildingId
-    JOIN "Hotel" h ON bl.HotelId = h.HotelId
-    WHERE b.UserId = p_user_id
-    ORDER BY b.BookingDate DESC;
+
+        b.bookingid,
+
+        h.hotelname::TEXT,
+
+        h.tel::TEXT,
+
+        r.roomnumber::TEXT,
+
+        b.startdate,
+
+        b.enddate,
+
+        b.totalcost
+
+    FROM "booking" b
+
+    JOIN "has" has ON b.bookingid = has.bookingid
+
+    JOIN "room" r ON has.roomnumber = r.roomnumber AND has.buildingid = r.buildingid
+
+    JOIN "building" bl ON r.buildingid = bl.buildingid
+
+    JOIN "hotel" h ON bl.hotelid = h.hotelid
+
+    WHERE b.userId = p_user_id
+
+    ORDER BY b.bookingdate DESC;
+
 END;
-$$;
+
+$$; 
