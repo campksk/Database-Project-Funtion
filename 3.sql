@@ -24,3 +24,5 @@ END;
 $$;
 
 SELECT * FROM ViewHotelList;
+CALL CreateBooking(1, 343, 65, '2026-03-01', '2026-03-03'); --จองไม่เกิน limit
+CALL CreateBooking(1, 343, 65, '2026-03-01', '2026-03-06'); --จองเกิน limit
