@@ -9,4 +9,5 @@ BEGIN
 END;
 $$;
 
-SELECT * FROM LoginUser('john@email.com', 'mypassword');
+SELECT * FROM LoginUser('john@email.com', 'mypassword'); --Correct
+SELECT * FROM LoginUser('john@email.com', 'wrong_pass'); --Worng
